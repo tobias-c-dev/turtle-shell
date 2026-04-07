@@ -32,7 +32,7 @@ int main() {
         std::cout << "$ ";
 
         std::string input;
-        std::getline(std::cin, input);
+        if (!std::getline(std::cin, input)) break;
 
         auto tokens = split(input);
         if (tokens.empty()) continue;
@@ -40,6 +40,7 @@ int main() {
         const std::string& cmd = tokens[0];
 
         if (cmd == "type") {
+            if (tokens.size() < 2) { std::cout << "type: missing argument\n"; continue; }
             const std::string& arg = tokens[1];
             if (commands.count(arg) || arg == "type")
                 std::cout << arg << " is a shell builtin\n";
